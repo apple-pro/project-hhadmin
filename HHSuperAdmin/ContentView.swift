@@ -8,9 +8,19 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @ObservedObject var authenticationManager = AuthenticationManager.standard
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        
+        ZStack {
+            if authenticationManager.isAuthenticated {
+                Dashboard()
+            } else {
+                Login()
+            }
+            
+        }
     }
 }
 
