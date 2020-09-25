@@ -2,12 +2,13 @@
 The one place that the super admin needs to go.
 
 ## Features
-App Management
+Application
 - Deployment
 - Monitoring
-- Feature Toggles / Configs
+- Configuration
 
-Data Management
-- Data Processing
-- Data Wipe
+Data
+- Management
+- Processing
+- Cleanup
 
