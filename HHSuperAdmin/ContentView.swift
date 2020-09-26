@@ -17,10 +17,10 @@ struct ContentView: View {
         ZStack {
             if configurationManager.isNotConfigured {
                 ConfigurationSetup()
-            } else if authenticationManager.isAuthenticated {
-                Dashboard()
-            } else {
+            } else if authenticationManager.isNotAuthenticated {
                 Login()
+            } else {
+                Dashboard()
             }
             
         }

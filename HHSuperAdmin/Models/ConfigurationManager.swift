@@ -17,21 +17,21 @@ class ConfigurationManager: ObservableObject {
     @Published var name: String?
     @Published var apiEndpoint: String?
     
-    var isNotConfigured: Bool {
-        name?.isEmpty ?? true
+    private init() {
+        apiEndpoint = Config.get(kEndpoint)
+        name = Config.get(kName)
     }
     
-    private init() {
-        apiEndpoint = UserDefaults.standard.string(forKey: kEndpoint)
-        name = UserDefaults.standard.string(forKey: kName)
+    var isNotConfigured: Bool {
+        name?.isEmpty ?? true || apiEndpoint?.isEmpty ?? true
     }
     
     func configure(withName name: String, andAPI apiEndpoint: String) {
         self.name = name
         self.apiEndpoint = apiEndpoint
         
-        UserDefaults.standard.setValue(name, forKey: kName)
-        UserDefaults.standard.setValue(apiEndpoint, forKey: kEndpoint)
+        Config.set(key: kName, name)
+        Config.set(key: kEndpoint, apiEndpoint)
     }
     
 }
