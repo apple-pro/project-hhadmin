@@ -35,6 +35,11 @@ struct Navigation: View {
             
             Section(header: Text("Data")) {
                 NavigationLink(
+                    destination: CompanySetup(),
+                    label: { NavItem("Setup", "person.crop.circle.badge.plus")}
+                )
+                
+                NavigationLink(
                     destination:Text("TODO"),
                     label: { NavItem("Management", "square.and.pencil")}
                 )
