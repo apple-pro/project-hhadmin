@@ -9,11 +9,12 @@ import SwiftUI
 
 struct DataCleanupDashboard: View {
     
-    @State var deleteAll = true
+    @State var deleteAll = false
     
     @State var deleteRoles = false
     @State var deleteAudit = true
     @State var deleteCompanies = true
+    @State var deleteUsers = true
     
     var body: some View {
         Form {
@@ -22,22 +23,31 @@ struct DataCleanupDashboard: View {
                 
                 Section(header: Text("Target Tables")) {
                     
-                    Toggle(isOn: $deleteCompanies) {
-                        Text("Companies")
-                    }
-                    
                     Toggle(isOn: $deleteRoles) {
                         Text("Roles")
                     }
                     
+                    Toggle(isOn: $deleteCompanies) {
+                        Text("Companies")
+                    }
+                    
                     Toggle(isOn: $deleteAudit) {
                         Text("Audit Logs")
+                    }
+                    
+                    Toggle(isOn: $deleteUsers) {
+                        Text("Users")
                     }
                 }
                 
             }
             
             Section {
+                
+                Toggle(isOn: $deleteAll) {
+                    Text("Delete All")
+                }
+                
                 Button(action: {
                     //do delete
                 }) {
@@ -45,10 +55,6 @@ struct DataCleanupDashboard: View {
                         Image(systemName: "trash")
                         Text(deleteAll ? "Reset Database" : "Remove Selected Data")
                     }
-                }
-                
-                Toggle(isOn: $deleteAll) {
-                    Text("Delete All")
                 }
             }
             
