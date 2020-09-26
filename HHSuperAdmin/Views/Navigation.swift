@@ -45,7 +45,7 @@ struct Navigation: View {
                 )
                 
                 NavigationLink(
-                    destination: Text("TODO"),
+                    destination: DataCleanupDashboard(),
                     label: { NavItem("Cleanup", "trash")}
                 )
             }
