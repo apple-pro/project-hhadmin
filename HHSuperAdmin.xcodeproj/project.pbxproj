@@ -11,6 +11,7 @@
 		F04E060A251EB2F100175CAA /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04E0609251EB2F100175CAA /* Login.swift */; };
 		F04E060E251EB60F00175CAA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04E060D251EB60F00175CAA /* Constants.swift */; };
 		F04E0611251EB80A00175CAA /* Dashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04E0610251EB80A00175CAA /* Dashboard.swift */; };
+		F04E0614251EBB7200175CAA /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04E0613251EBB7200175CAA /* Navigation.swift */; };
 		F0E35DC9251E1E8000A51B01 /* HHSuperAdminApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E35DC8251E1E8000A51B01 /* HHSuperAdminApp.swift */; };
 		F0E35DCB251E1E8000A51B01 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E35DCA251E1E8000A51B01 /* ContentView.swift */; };
 		F0E35DCD251E1E8200A51B01 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0E35DCC251E1E8200A51B01 /* Assets.xcassets */; };
@@ -22,6 +23,7 @@
 		F04E0609251EB2F100175CAA /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		F04E060D251EB60F00175CAA /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F04E0610251EB80A00175CAA /* Dashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dashboard.swift; sourceTree = "<group>"; };
+		F04E0613251EBB7200175CAA /* Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
 		F0E35DC5251E1E8000A51B01 /* HHSuperAdmin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HHSuperAdmin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0E35DC8251E1E8000A51B01 /* HHSuperAdminApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HHSuperAdminApp.swift; sourceTree = "<group>"; };
 		F0E35DCA251E1E8000A51B01 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -54,6 +56,7 @@
 			children = (
 				F04E0609251EB2F100175CAA /* Login.swift */,
 				F04E0610251EB80A00175CAA /* Dashboard.swift */,
+				F04E0613251EBB7200175CAA /* Navigation.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -168,6 +171,7 @@
 			files = (
 				F04E060E251EB60F00175CAA /* Constants.swift in Sources */,
 				F04E0607251EB1E900175CAA /* AuthenticationManager.swift in Sources */,
+				F04E0614251EBB7200175CAA /* Navigation.swift in Sources */,
 				F0E35DCB251E1E8000A51B01 /* ContentView.swift in Sources */,
 				F0E35DC9251E1E8000A51B01 /* HHSuperAdminApp.swift in Sources */,
 				F04E0611251EB80A00175CAA /* Dashboard.swift in Sources */,
