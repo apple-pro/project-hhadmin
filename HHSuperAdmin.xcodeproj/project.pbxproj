@@ -15,6 +15,11 @@
 		F04E0617251EBFE600175CAA /* ConfigurationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04E0616251EBFE600175CAA /* ConfigurationManager.swift */; };
 		F04E061A251EC22D00175CAA /* ConfigurationSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04E0619251EC22D00175CAA /* ConfigurationSetup.swift */; };
 		F04E061F251EC58400175CAA /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04E061E251EC58400175CAA /* Utilities.swift */; };
+		F05908E7251F274F00B42655 /* DataManagementDashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05908E6251F274F00B42655 /* DataManagementDashboard.swift */; };
+		F05908EB251F28CF00B42655 /* Candidates.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05908EA251F28CF00B42655 /* Candidates.swift */; };
+		F05908EF251F28F100B42655 /* Roles.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05908EE251F28F100B42655 /* Roles.swift */; };
+		F05908F2251F2BE800B42655 /* Candidate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05908F1251F2BE800B42655 /* Candidate.swift */; };
+		F05908F5251F3C0700B42655 /* CandidateForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05908F4251F3C0700B42655 /* CandidateForm.swift */; };
 		F0789CDC251EF04700E9756D /* DataCleanupDashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0789CDB251EF04700E9756D /* DataCleanupDashboard.swift */; };
 		F0789CDF251EF5E700E9756D /* CompanySetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0789CDE251EF5E700E9756D /* CompanySetup.swift */; };
 		F0E35DC9251E1E8000A51B01 /* HHSuperAdminApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E35DC8251E1E8000A51B01 /* HHSuperAdminApp.swift */; };
@@ -32,6 +37,11 @@
 		F04E0616251EBFE600175CAA /* ConfigurationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationManager.swift; sourceTree = "<group>"; };
 		F04E0619251EC22D00175CAA /* ConfigurationSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigurationSetup.swift; sourceTree = "<group>"; };
 		F04E061E251EC58400175CAA /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		F05908E6251F274F00B42655 /* DataManagementDashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManagementDashboard.swift; sourceTree = "<group>"; };
+		F05908EA251F28CF00B42655 /* Candidates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Candidates.swift; sourceTree = "<group>"; };
+		F05908EE251F28F100B42655 /* Roles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Roles.swift; sourceTree = "<group>"; };
+		F05908F1251F2BE800B42655 /* Candidate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Candidate.swift; sourceTree = "<group>"; };
+		F05908F4251F3C0700B42655 /* CandidateForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateForm.swift; sourceTree = "<group>"; };
 		F0789CDB251EF04700E9756D /* DataCleanupDashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCleanupDashboard.swift; sourceTree = "<group>"; };
 		F0789CDE251EF5E700E9756D /* CompanySetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanySetup.swift; sourceTree = "<group>"; };
 		F0E35DC5251E1E8000A51B01 /* HHSuperAdmin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HHSuperAdmin.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -58,6 +68,7 @@
 			children = (
 				F04E0606251EB1E900175CAA /* AuthenticationManager.swift */,
 				F04E0616251EBFE600175CAA /* ConfigurationManager.swift */,
+				F05908F1251F2BE800B42655 /* Candidate.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -71,8 +82,20 @@
 				F04E0613251EBB7200175CAA /* Navigation.swift */,
 				F0789CDE251EF5E700E9756D /* CompanySetup.swift */,
 				F0789CDB251EF04700E9756D /* DataCleanupDashboard.swift */,
+				F05908E6251F274F00B42655 /* DataManagementDashboard.swift */,
+				F05908E9251F289400B42655 /* DataManagementDashboard */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		F05908E9251F289400B42655 /* DataManagementDashboard */ = {
+			isa = PBXGroup;
+			children = (
+				F05908EA251F28CF00B42655 /* Candidates.swift */,
+				F05908F4251F3C0700B42655 /* CandidateForm.swift */,
+				F05908EE251F28F100B42655 /* Roles.swift */,
+			);
+			path = DataManagementDashboard;
 			sourceTree = "<group>";
 		};
 		F0E35DBC251E1E8000A51B01 = {
@@ -184,15 +207,20 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F05908F5251F3C0700B42655 /* CandidateForm.swift in Sources */,
 				F0789CDC251EF04700E9756D /* DataCleanupDashboard.swift in Sources */,
 				F04E0617251EBFE600175CAA /* ConfigurationManager.swift in Sources */,
 				F04E060E251EB60F00175CAA /* Constants.swift in Sources */,
+				F05908EB251F28CF00B42655 /* Candidates.swift in Sources */,
 				F04E0607251EB1E900175CAA /* AuthenticationManager.swift in Sources */,
 				F04E0614251EBB7200175CAA /* Navigation.swift in Sources */,
 				F0E35DCB251E1E8000A51B01 /* ContentView.swift in Sources */,
+				F05908F2251F2BE800B42655 /* Candidate.swift in Sources */,
 				F0E35DC9251E1E8000A51B01 /* HHSuperAdminApp.swift in Sources */,
+				F05908EF251F28F100B42655 /* Roles.swift in Sources */,
 				F04E0611251EB80A00175CAA /* Dashboard.swift in Sources */,
 				F04E060A251EB2F100175CAA /* Login.swift in Sources */,
+				F05908E7251F274F00B42655 /* DataManagementDashboard.swift in Sources */,
 				F0789CDF251EF5E700E9756D /* CompanySetup.swift in Sources */,
 				F04E061F251EC58400175CAA /* Utilities.swift in Sources */,
 				F04E061A251EC22D00175CAA /* ConfigurationSetup.swift in Sources */,

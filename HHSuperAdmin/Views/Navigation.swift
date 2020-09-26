@@ -40,7 +40,7 @@ struct Navigation: View {
                 )
                 
                 NavigationLink(
-                    destination:Text("TODO"),
+                    destination: DataManagementDashboard(),
                     label: { NavItem("Management", "square.and.pencil")}
                 )
                 

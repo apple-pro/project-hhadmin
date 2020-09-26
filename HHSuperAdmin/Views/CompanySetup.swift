@@ -20,6 +20,8 @@ struct CompanySetup: View {
     @State var adminPasswordVerify = ""
     @State var showPassword = false
     
+    @State var enforceDataSecurity = false
+    
     var body: some View {
         
         Form {
@@ -33,7 +35,11 @@ struct CompanySetup: View {
                 }
                 
                 Toggle(isOn: $internalCompany) {
-                    Text(internalCompany ? "Internal" : "Public")
+                    VStack(alignment: .leading) {
+                        Text(internalCompany ? "Internal" : "Public")
+                        Text(internalCompany ? "Internal Test Company" : "A Real Company")
+                            .font(.caption2)
+                    }
                 }
             }
             
@@ -64,6 +70,14 @@ struct CompanySetup: View {
                 }
             }
             
+            if !internalCompany {
+                Section(header: Text("Restriction")) {
+                    Toggle(isOn: $enforceDataSecurity) {
+                        Text("Restricted Access to Departments")
+                    }
+                }
+            }
+            
             if !companyName.isEmpty {
                 Button(action: {
                     //create company
@@ -73,7 +87,9 @@ struct CompanySetup: View {
                         Text("Create Company: \(companyName)")
                     }
                 }
-            }}
+            }
+            
+        }.navigationTitle("Setup New Company")
     }
 }
 
