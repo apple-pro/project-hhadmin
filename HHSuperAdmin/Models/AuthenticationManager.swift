@@ -9,16 +9,16 @@ import Foundation
 
 class AuthenticationManager: ObservableObject {
     
-    static var standard = AuthenticationManager()
+    static let shared = AuthenticationManager()
     
     @Published var username: String?
     @Published var password: String?
     
+    private init() {}
+    
     var isAuthenticated: Bool {
         return !(username?.isEmpty ?? true || password?.isEmpty ?? true)
     }
-    
-    private init() {}
     
     func set(username: String, password: String) {
         self.username = username

@@ -9,24 +9,22 @@ import SwiftUI
 
 struct Login: View {
     
-    @ObservedObject var authenticationManager = AuthenticationManager.standard
+    @ObservedObject var authenticationManager = AuthenticationManager.shared
     
     @State var username: String = ""
     @State var password: String = ""
     
     var body: some View {
-        VStack {
-            TextField("Username", text: $username)
-            SecureField("Password", text: $password)
-            
-            Divider()
+        Form {
+            Section(header: Text("Credentials")) {
+                TextField("Username", text: $username)
+                SecureField("Password", text: $password)
+            }
             
             Button("Login") {
                 authenticationManager.set(username: username, password: password)
             }
         }
-        .padding()
-        .frame(maxWidth: 300)
     }
 }
 
