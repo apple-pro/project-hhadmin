@@ -34,8 +34,8 @@ struct DataManagementDashboard: View {
                 )
                 
                 NavigationLink(
-                    destination: Roles(),
-                    label: { NavItem("Account", "person.2.square.stack")}
+                    destination: CompanyAccountsDashboard(),
+                    label: { NavItem("Company Accounts", "person.2.square.stack")}
                 )
                 
                 NavigationLink(

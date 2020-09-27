@@ -55,7 +55,9 @@ struct Navigation: View {
                 )
             }
             
-        }.listStyle(SidebarListStyle()).navigationTitle("Super Admin")
+        }
+        .listStyle(SidebarListStyle())
+        .navigationTitle("Super Admin")
     }
 }
 

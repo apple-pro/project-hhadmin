@@ -13,3 +13,8 @@ struct Candidate {
     var name: String
     var jobDescription: String
 }
+
+struct CompanyAccount: Identifiable, Codable {
+    let id: Int64
+    let name: String
+}
