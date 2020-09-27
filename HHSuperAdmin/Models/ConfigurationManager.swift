@@ -39,7 +39,12 @@ class ConfigurationManager: ObservableObject {
     }
     
     var isNotConfigured: Bool {
-        name?.isEmpty ?? true || apiEndpoint?.isEmpty ?? true
+        name?.isEmpty ?? true
+            || apiEndpoint?.isEmpty ?? true
+            || clientId?.isEmpty ?? true
+            || clientSecret?.isEmpty ?? true
+            || username?.isEmpty ?? true
+            || password?.isEmpty ?? true
     }
     
     func configure(withName name: String, api apiEndpoint: String, clientId: String, andSecret clientSecret: String) {

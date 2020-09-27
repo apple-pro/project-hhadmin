@@ -13,7 +13,7 @@ struct ConfigurationSetup: View {
     @ObservedObject var backend = BackendAPI.shared
     
     @State var name = "Development"
-    @State var apiEndpoint = ""
+    @State var apiEndpoint = "https://api.dev.kwler.net"
     @State var clientId = ""
     @State var clientSecret = ""
     @State var username: String = ""
@@ -43,8 +43,18 @@ struct ConfigurationSetup: View {
             
             Section {
                 Text("Validation Status: \(backend.testStatus.display)")
-                Button("Test") {
-                    backend.performStatusTestOnAPI(apiEndpoint, clientId: clientId, clientSecret: clientSecret, username:username, password: password)
+                
+                switch backend.testStatus {
+                case .pass:
+                    Button("Configure \(name)") {
+                        configurationManager.configure(withName: name, api: apiEndpoint, clientId: clientId, andSecret: clientSecret)
+                        
+                        configurationManager.configureWithUsername(username, andPassword: password)
+                    }
+                default:
+                    Button("Test") {
+                        backend.performStatusTestOnAPI(apiEndpoint, clientId: clientId, clientSecret: clientSecret, username:username, password: password)
+                    }
                 }
             }
             
