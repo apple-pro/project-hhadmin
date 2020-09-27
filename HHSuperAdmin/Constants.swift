@@ -12,7 +12,8 @@ extension Color {
 }
 
 let mockCandidates = [
-    Candidate(id: "1000001", name: "Johnny Kepler", jobDescription: "Scientist"),
-    Candidate(id: "1000002", name: "Thomas Lord", jobDescription: "Engineer"),
-    Candidate(id: "1000003", name: "Michael Scotch", jobDescription: "Jobless")
+    Candidate(candId: 1000001, fullName: "Johnny Kepler", currentWorkTitle: "Scientist"),
+    Candidate(candId: 1000002, fullName: "Thomas Lord", currentWorkTitle: "Engineer"),
+    Candidate(candId: 1000003, fullName: "Michael Scotch", currentWorkTitle: "Jobless")
+    
 ]

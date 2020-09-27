@@ -32,6 +32,7 @@ class BackendAPI: ObservableObject {
     
     @Published var testStatus: TestStatus = .idle
     @Published var companyAccounts = [CompanyAccount]()
+    @Published var candidates = [Candidate]()
     
     private var config = ConfigurationManager.shared
     private var accessToken: String?
@@ -75,50 +76,13 @@ class BackendAPI: ObservableObject {
                    }
     }
     
-    func login() {
-        
-        let loginURL = "\(config.apiEndpoint!)/oauth/token"
-        let clientId = config.clientId!
-        let clientSecret = config.clientSecret!
-        let username = config.username!
-        let password = config.password!
-        
-        let headers: HTTPHeaders = [
-            .authorization(username: clientId, password: clientSecret),
-            .contentType("application/x-www-form-urlencoded")
-        ]
-        
-        let parameters = [
-            "grant_type": "password",
-            "scope": "any",
-            "username": username,
-            "password": password
-        ]
-        
-        AF.request(loginURL, method: .post,
-                   parameters: parameters,
-                   headers: headers).responseJSON { response in
-                    
-                    switch response.result {
-                    case .success(let result):
-                        if let json = result as? NSDictionary {
-                            if let accessToken = json["access_token"] as? String {
-                                self.accessToken = accessToken
-                            }
-                        }
-                    case .failure(let error):
-                        debugPrint(error)
-                    }
-                   }
-        
-    }
-    
-    func isLoggedIn() -> Bool {
-        return accessToken != nil
-    }
-    
     func loginThen(_ action: @escaping () -> Void) {
         
+        if accessToken != nil {
+            action()
+            return
+        }
+        
         let loginURL = "\(config.apiEndpoint!)/oauth/token"
         let clientId = config.clientId!
         let clientSecret = config.clientSecret!
@@ -150,16 +114,17 @@ class BackendAPI: ObservableObject {
                         }
                     case .failure(let error):
                         debugPrint(error)
+                        self.accessToken = nil
                     }
                     
                     action()
                    }
     }
     
-    func fetchCandidates() {
-        let listCompanyAccountsUrl = "\(config.apiEndpoint!)/api/companyAccounts"
+    func fetch<T: Decodable>(_ resource: String, withType type: T.Type, onCompletion completionHandler: @escaping (T) -> Void) {
+        let listCompanyAccountsUrl = "\(config.apiEndpoint!)/api/\(resource)"
         
-        let performCandidatesFetch = {
+        let fetchCompanyAccounts = {
             if let activeAccessToken = self.accessToken {
                 let headers: HTTPHeaders = [
                     .authorization(bearerToken: activeAccessToken)
@@ -171,8 +136,8 @@ class BackendAPI: ObservableObject {
                     case .success(let result):
                         let json = JSON(result)
                         let decoder = JSONDecoder()
-                        if let companyAccounts = try? decoder.decode([CompanyAccount].self, from: json["_embedded"]["companyAccounts"].rawData()) {
-                            self.companyAccounts = companyAccounts
+                        if let results = try? decoder.decode(type, from: json["_embedded"][resource].rawData()) {
+                            completionHandler(results)
                         }
                     case .failure(let error):
                         debugPrint(error)
@@ -181,12 +146,21 @@ class BackendAPI: ObservableObject {
             }
         }
         
-        if isLoggedIn() {
-            performCandidatesFetch()
-        } else {
-            loginThen {
-                performCandidatesFetch()
-            }
+        loginThen {
+            fetchCompanyAccounts()
         }
     }
+    
+    func fetchCompanyAccounts() {
+        fetch("companyAccounts", withType: [CompanyAccount].self) { companyAccounts in
+            self.companyAccounts = companyAccounts
+        }
+    }
+    
+    func fetchCandidates() {
+        fetch("candidates", withType: [Candidate].self) { candidates in
+            self.candidates = candidates
+        }
+    }
+    
 }

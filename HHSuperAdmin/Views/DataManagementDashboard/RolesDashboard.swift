@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Roles: View {
+struct RolesDashboard: View {
     var body: some View {
         Text("Roles")
     }
@@ -15,6 +15,6 @@ struct Roles: View {
 
 struct Roles_Previews: PreviewProvider {
     static var previews: some View {
-        Roles()
+        RolesDashboard()
     }
 }

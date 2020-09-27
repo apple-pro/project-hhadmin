@@ -12,24 +12,24 @@ struct DataManagementDashboard: View {
         List {
             Section(header: Text("ElasticSearch")) {
                 NavigationLink(
-                    destination: Candidates(),
+                    destination: CandidatesDashboard(),
                     label: { NavItem("Candidate", "person")}
                 )
                 
                 NavigationLink(
-                    destination: Candidates(),
+                    destination: CandidatesDashboard(),
                     label: { NavItem("Department", "person")}
                 )
                 
                 NavigationLink(
-                    destination: Candidates(),
+                    destination: CandidatesDashboard(),
                     label: { NavItem("Products", "person")}
                 )
             }
             
             Section(header: Text("RDS")) {
                 NavigationLink(
-                    destination: Roles(),
+                    destination: RolesDashboard(),
                     label: { NavItem("Role", "lock.shield")}
                 )
                 
@@ -39,7 +39,7 @@ struct DataManagementDashboard: View {
                 )
                 
                 NavigationLink(
-                    destination: Roles(),
+                    destination: RolesDashboard(),
                     label: { NavItem("User", "person.circle")}
                 )
             }

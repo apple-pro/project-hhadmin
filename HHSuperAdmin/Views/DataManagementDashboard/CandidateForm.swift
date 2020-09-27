@@ -15,14 +15,14 @@ struct CandidateForm: View {
         Form {
             
             Section(header: Text("Profile")) {
-                TextField("Name", text: $candidate.name)
+                TextField("Name", text: $candidate.fullName)
             }
             
             Section(header: Text("Job Experience")) {
                 
             }
         }
-        .navigationTitle(candidate.name)
+        .navigationTitle(candidate.fullName)
         .navigationBarItems(trailing: Button(action: {
             
         }) {

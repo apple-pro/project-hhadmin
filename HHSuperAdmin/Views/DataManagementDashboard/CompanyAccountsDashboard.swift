@@ -17,9 +17,9 @@ struct CompanyAccountsDashboard: View {
         }
         .navigationTitle("Company Accounts")
         .navigationBarItems(trailing: Button(action: {
-            backend.fetchCandidates()
+            backend.fetchCompanyAccounts()
         }) {
-            Image(systemName: "arrow.counterclockwise")
+            Image(systemName: "icloud.and.arrow.down")
         })
     }
 }

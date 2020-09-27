@@ -7,15 +7,21 @@
 
 import SwiftUI
 
-struct Candidates: View {
+struct CandidatesDashboard: View {
+    
+    @ObservedObject var backend = BackendAPI.shared
+    
     var body: some View {
         List {
-            ForEach(mockCandidates, id: \.self.id) { candidate in
+            ForEach(backend.candidates, id: \.self.id) { candidate in
                 
                 NavigationLink(destination: CandidateForm(candidate: candidate)) {
                     VStack {
-                        Text(candidate.name)
-                        Text(candidate.jobDescription).font(.caption)
+                        Text(candidate.fullName)
+                            .font(.title)
+                        
+                        Text(candidate.currentCompanyName ?? "Jobless")
+                            .font(.caption)
                     }
                 }
                 
@@ -23,15 +29,15 @@ struct Candidates: View {
         }
         .navigationTitle("Candidates")
         .navigationBarItems(trailing: Button(action: {
-            
+            backend.fetchCandidates()
         }) {
-            Image(systemName: "plus")
+            Image(systemName: "icloud.and.arrow.down")
         })
     }
 }
 
 struct Candidates_Previews: PreviewProvider {
     static var previews: some View {
-        Candidates()
+        CandidatesDashboard()
     }
 }
