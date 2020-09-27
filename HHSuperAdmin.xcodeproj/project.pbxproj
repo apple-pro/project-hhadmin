@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -74,7 +74,6 @@
 				27B3E96E6FF8E499A7F7C833 /* Pods-HHSuperAdmin.debug.xcconfig */,
 				4015F5495AA4754A98E9BB40 /* Pods-HHSuperAdmin.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
