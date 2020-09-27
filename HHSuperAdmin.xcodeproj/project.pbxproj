@@ -119,13 +119,13 @@
 			children = (
 				F0E35DC8251E1E8000A51B01 /* HHSuperAdminApp.swift */,
 				F0E35DCA251E1E8000A51B01 /* ContentView.swift */,
+				F04E060D251EB60F00175CAA /* Constants.swift */,
+				F04E061E251EC58400175CAA /* Utilities.swift */,
 				F04E05FF251EB1BA00175CAA /* Models */,
 				F04E0600251EB1C100175CAA /* Views */,
 				F0E35DCC251E1E8200A51B01 /* Assets.xcassets */,
 				F0E35DD1251E1E8200A51B01 /* Info.plist */,
 				F0E35DCE251E1E8200A51B01 /* Preview Content */,
-				F04E060D251EB60F00175CAA /* Constants.swift */,
-				F04E061E251EC58400175CAA /* Utilities.swift */,
 			);
 			path = HHSuperAdmin;
 			sourceTree = "<group>";
