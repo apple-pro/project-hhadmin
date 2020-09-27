@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @ObservedObject var authenticationManager = AuthenticationManager.shared
     @ObservedObject var configurationManager = ConfigurationManager.shared
     
     var body: some View {
@@ -17,8 +16,6 @@ struct ContentView: View {
         ZStack {
             if configurationManager.isNotConfigured {
                 ConfigurationSetup()
-            } else if authenticationManager.isNotAuthenticated {
-                Login()
             } else {
                 Dashboard()
             }

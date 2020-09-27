@@ -9,12 +9,15 @@ import SwiftUI
 
 struct ConfigurationSetup: View {
     
-    let configurationManager = ConfigurationManager.shared
+    @ObservedObject var configurationManager = ConfigurationManager.shared
+    @ObservedObject var backend = BackendAPI.shared
     
-    @State var name = "Development Server"
-    @State var apiEndpoint = "https://dev.api.kwler.net"
+    @State var name = "Development"
+    @State var apiEndpoint = ""
     @State var clientId = ""
     @State var clientSecret = ""
+    @State var username: String = ""
+    @State var password: String = ""
     
     var body: some View {
         Form {
@@ -22,7 +25,7 @@ struct ConfigurationSetup: View {
                 TextField("Configuration", text: $name)
             }
             
-            Section(header: Text("Backend Server")) {
+            Section(header: Text("API Client")) {
                 TextField("API Endpoint", text: $apiEndpoint)
                 
                 TextField("Client ID", text: $clientId)
@@ -31,9 +34,20 @@ struct ConfigurationSetup: View {
                 SecureField("Client Secret", text: $clientSecret)
             }
             
-            Button("Configure") {
-                configurationManager.configure(withName: name, api: apiEndpoint, clientId: clientId, andSecret: clientSecret)
+            Section(header: Text("Credentials")) {
+                TextField("Username", text: $username)
+                    .autocapitalization(.none)
+                
+                SecureField("Password", text: $password)
             }
+            
+            Section {
+                Text("Validation Status: \(backend.testStatus.display)")
+                Button("Test") {
+                    backend.performStatusTestOnAPI(apiEndpoint, clientId: clientId, clientSecret: clientSecret, username:username, password: password)
+                }
+            }
+            
         }
     }
 }

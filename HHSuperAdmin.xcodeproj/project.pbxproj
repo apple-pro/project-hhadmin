@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		A2513D191C9C1074844D12B8 /* Pods_HHSuperAdmin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9F3CEED07CA134877B468D4 /* Pods_HHSuperAdmin.framework */; };
-		F04E0607251EB1E900175CAA /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04E0606251EB1E900175CAA /* AuthenticationManager.swift */; };
-		F04E060A251EB2F100175CAA /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04E0609251EB2F100175CAA /* Login.swift */; };
 		F04E060E251EB60F00175CAA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04E060D251EB60F00175CAA /* Constants.swift */; };
 		F04E0611251EB80A00175CAA /* Dashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04E0610251EB80A00175CAA /* Dashboard.swift */; };
 		F04E0614251EBB7200175CAA /* Navigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04E0613251EBB7200175CAA /* Navigation.swift */; };
@@ -23,6 +21,7 @@
 		F05908F5251F3C0700B42655 /* CandidateForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05908F4251F3C0700B42655 /* CandidateForm.swift */; };
 		F0789CDC251EF04700E9756D /* DataCleanupDashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0789CDB251EF04700E9756D /* DataCleanupDashboard.swift */; };
 		F0789CDF251EF5E700E9756D /* CompanySetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0789CDE251EF5E700E9756D /* CompanySetup.swift */; };
+		F098D4EA2520809900F24ED0 /* BackendAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F098D4E92520809900F24ED0 /* BackendAPI.swift */; };
 		F0E35DC9251E1E8000A51B01 /* HHSuperAdminApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E35DC8251E1E8000A51B01 /* HHSuperAdminApp.swift */; };
 		F0E35DCB251E1E8000A51B01 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E35DCA251E1E8000A51B01 /* ContentView.swift */; };
 		F0E35DCD251E1E8200A51B01 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F0E35DCC251E1E8200A51B01 /* Assets.xcassets */; };
@@ -33,8 +32,6 @@
 		27B3E96E6FF8E499A7F7C833 /* Pods-HHSuperAdmin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HHSuperAdmin.debug.xcconfig"; path = "Target Support Files/Pods-HHSuperAdmin/Pods-HHSuperAdmin.debug.xcconfig"; sourceTree = "<group>"; };
 		4015F5495AA4754A98E9BB40 /* Pods-HHSuperAdmin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HHSuperAdmin.release.xcconfig"; path = "Target Support Files/Pods-HHSuperAdmin/Pods-HHSuperAdmin.release.xcconfig"; sourceTree = "<group>"; };
 		A9F3CEED07CA134877B468D4 /* Pods_HHSuperAdmin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HHSuperAdmin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		F04E0606251EB1E900175CAA /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
-		F04E0609251EB2F100175CAA /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		F04E060D251EB60F00175CAA /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		F04E0610251EB80A00175CAA /* Dashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dashboard.swift; sourceTree = "<group>"; };
 		F04E0613251EBB7200175CAA /* Navigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Navigation.swift; sourceTree = "<group>"; };
@@ -48,6 +45,7 @@
 		F05908F4251F3C0700B42655 /* CandidateForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateForm.swift; sourceTree = "<group>"; };
 		F0789CDB251EF04700E9756D /* DataCleanupDashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCleanupDashboard.swift; sourceTree = "<group>"; };
 		F0789CDE251EF5E700E9756D /* CompanySetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanySetup.swift; sourceTree = "<group>"; };
+		F098D4E92520809900F24ED0 /* BackendAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendAPI.swift; sourceTree = "<group>"; };
 		F0E35DC5251E1E8000A51B01 /* HHSuperAdmin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HHSuperAdmin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0E35DC8251E1E8000A51B01 /* HHSuperAdminApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HHSuperAdminApp.swift; sourceTree = "<group>"; };
 		F0E35DCA251E1E8000A51B01 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -88,9 +86,9 @@
 		F04E05FF251EB1BA00175CAA /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				F04E0606251EB1E900175CAA /* AuthenticationManager.swift */,
 				F04E0616251EBFE600175CAA /* ConfigurationManager.swift */,
 				F05908F1251F2BE800B42655 /* Candidate.swift */,
+				F098D4E92520809900F24ED0 /* BackendAPI.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -99,7 +97,6 @@
 			isa = PBXGroup;
 			children = (
 				F04E0619251EC22D00175CAA /* ConfigurationSetup.swift */,
-				F04E0609251EB2F100175CAA /* Login.swift */,
 				F04E0610251EB80A00175CAA /* Dashboard.swift */,
 				F04E0613251EBB7200175CAA /* Navigation.swift */,
 				F0789CDE251EF5E700E9756D /* CompanySetup.swift */,
@@ -280,16 +277,15 @@
 				F04E0617251EBFE600175CAA /* ConfigurationManager.swift in Sources */,
 				F04E060E251EB60F00175CAA /* Constants.swift in Sources */,
 				F05908EB251F28CF00B42655 /* Candidates.swift in Sources */,
-				F04E0607251EB1E900175CAA /* AuthenticationManager.swift in Sources */,
 				F04E0614251EBB7200175CAA /* Navigation.swift in Sources */,
 				F0E35DCB251E1E8000A51B01 /* ContentView.swift in Sources */,
 				F05908F2251F2BE800B42655 /* Candidate.swift in Sources */,
 				F0E35DC9251E1E8000A51B01 /* HHSuperAdminApp.swift in Sources */,
 				F05908EF251F28F100B42655 /* Roles.swift in Sources */,
 				F04E0611251EB80A00175CAA /* Dashboard.swift in Sources */,
-				F04E060A251EB2F100175CAA /* Login.swift in Sources */,
 				F05908E7251F274F00B42655 /* DataManagementDashboard.swift in Sources */,
 				F0789CDF251EF5E700E9756D /* CompanySetup.swift in Sources */,
+				F098D4EA2520809900F24ED0 /* BackendAPI.swift in Sources */,
 				F04E061F251EC58400175CAA /* Utilities.swift in Sources */,
 				F04E061A251EC22D00175CAA /* ConfigurationSetup.swift in Sources */,
 			);
