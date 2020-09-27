@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A2513D191C9C1074844D12B8 /* Pods_HHSuperAdmin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9F3CEED07CA134877B468D4 /* Pods_HHSuperAdmin.framework */; };
 		F04E0607251EB1E900175CAA /* AuthenticationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04E0606251EB1E900175CAA /* AuthenticationManager.swift */; };
 		F04E060A251EB2F100175CAA /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04E0609251EB2F100175CAA /* Login.swift */; };
 		F04E060E251EB60F00175CAA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = F04E060D251EB60F00175CAA /* Constants.swift */; };
@@ -29,6 +30,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		27B3E96E6FF8E499A7F7C833 /* Pods-HHSuperAdmin.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HHSuperAdmin.debug.xcconfig"; path = "Target Support Files/Pods-HHSuperAdmin/Pods-HHSuperAdmin.debug.xcconfig"; sourceTree = "<group>"; };
+		4015F5495AA4754A98E9BB40 /* Pods-HHSuperAdmin.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HHSuperAdmin.release.xcconfig"; path = "Target Support Files/Pods-HHSuperAdmin/Pods-HHSuperAdmin.release.xcconfig"; sourceTree = "<group>"; };
+		A9F3CEED07CA134877B468D4 /* Pods_HHSuperAdmin.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HHSuperAdmin.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F04E0606251EB1E900175CAA /* AuthenticationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationManager.swift; sourceTree = "<group>"; };
 		F04E0609251EB2F100175CAA /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
 		F04E060D251EB60F00175CAA /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -57,12 +61,31 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A2513D191C9C1074844D12B8 /* Pods_HHSuperAdmin.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		186A31FAE186A66BC3D9F75A /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				27B3E96E6FF8E499A7F7C833 /* Pods-HHSuperAdmin.debug.xcconfig */,
+				4015F5495AA4754A98E9BB40 /* Pods-HHSuperAdmin.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		5B316286DD37C97F85D7E235 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A9F3CEED07CA134877B468D4 /* Pods_HHSuperAdmin.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		F04E05FF251EB1BA00175CAA /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -103,6 +126,8 @@
 			children = (
 				F0E35DC7251E1E8000A51B01 /* HHSuperAdmin */,
 				F0E35DC6251E1E8000A51B01 /* Products */,
+				186A31FAE186A66BC3D9F75A /* Pods */,
+				5B316286DD37C97F85D7E235 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -145,9 +170,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F0E35DD4251E1E8200A51B01 /* Build configuration list for PBXNativeTarget "HHSuperAdmin" */;
 			buildPhases = (
+				CCE12FA9F6F36DBE9EBEC2E0 /* [CP] Check Pods Manifest.lock */,
 				F0E35DC1251E1E8000A51B01 /* Sources */,
 				F0E35DC2251E1E8000A51B01 /* Frameworks */,
 				F0E35DC3251E1E8000A51B01 /* Resources */,
+				5C6349EB800DEDD956AF55B0 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -201,6 +228,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5C6349EB800DEDD956AF55B0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HHSuperAdmin/Pods-HHSuperAdmin-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-HHSuperAdmin/Pods-HHSuperAdmin-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-HHSuperAdmin/Pods-HHSuperAdmin-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		CCE12FA9F6F36DBE9EBEC2E0 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-HHSuperAdmin-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		F0E35DC1251E1E8000A51B01 /* Sources */ = {
@@ -348,6 +417,7 @@
 		};
 		F0E35DD5251E1E8200A51B01 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 27B3E96E6FF8E499A7F7C833 /* Pods-HHSuperAdmin.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -370,6 +440,7 @@
 		};
 		F0E35DD6251E1E8200A51B01 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4015F5495AA4754A98E9BB40 /* Pods-HHSuperAdmin.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
