@@ -13,6 +13,9 @@ struct CandidatesDashboard: View {
     
     @State var candidates: [Candidate] = [Candidate]()
     @State var loading = false
+    @State var advanceSearch = false
+    
+    @State var searchText = ""
     
     var body: some View {
         List {
@@ -39,12 +42,37 @@ struct CandidatesDashboard: View {
             }
         }
         .navigationTitle("Candidates")
-        .navigationBarItems(trailing: Button(action: loadData) {
-            Image(systemName: "icloud.and.arrow.down")
-        }.disabled(loading))
+        .navigationBarItems(trailing: HStack {
+            Button(action: loadData) {
+                Image(systemName: "icloud.and.arrow.down")
+            }.disabled(loading)
+            
+            Button(action: showSearch) {
+                Image(systemName: "magnifyingglass")
+            }.disabled(loading)
+        })
+        
         .onAppear {
             if candidates.isEmpty {
                 loadData()
+            }
+        }
+        
+        .sheet(isPresented: $advanceSearch) {
+            Form {
+                Section(header: Text("Basic")) {
+                    TextField("Search...", text: $searchText)
+                }
+                
+                Section {
+                    Button(action: showSearch) {
+                        HStack(alignment: .center) {
+                            Text("Search")
+                            Image(systemName: "magnifyingglass")
+                        }
+                    }
+                }
+                
             }
         }
     }
@@ -55,6 +83,10 @@ struct CandidatesDashboard: View {
             self.candidates = results
             self.loading = false
         }
+    }
+    
+    func showSearch() {
+        advanceSearch.toggle()
     }
 }
 
