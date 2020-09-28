@@ -10,7 +10,8 @@ import SwiftUI
 struct ConfigurationSetup: View {
     
     @ObservedObject var configurationManager = ConfigurationManager.shared
-    @ObservedObject var backend = BackendAPI.shared
+    
+    var backend = BackendAPI.shared
     
     @State var name = "Development"
     @State var apiEndpoint = "https://api.dev.kwler.net"

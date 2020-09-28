@@ -9,7 +9,7 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
-class BackendAPI: ObservableObject {
+class BackendAPI {
     
     static let shared = BackendAPI()
     
@@ -29,9 +29,6 @@ class BackendAPI: ObservableObject {
             }
         }
     }
-    
-    @Published var companyAccounts = [CompanyAccount]()
-    @Published var candidates = [Candidate]()
     
     private var config = ConfigurationManager.shared
     private var accessToken: String?
@@ -76,6 +73,7 @@ class BackendAPI: ObservableObject {
     
     func loginThen(_ action: @escaping () -> Void) {
         
+        //TODO: check if access token is still valid
         if accessToken != nil {
             action()
             return
@@ -122,7 +120,7 @@ class BackendAPI: ObservableObject {
     func fetch<T: Decodable>(_ resource: String, withType type: T.Type, onCompletion completionHandler: @escaping (T) -> Void) {
         let listCompanyAccountsUrl = "\(config.apiEndpoint!)/api/\(resource)"
         
-        let fetchCompanyAccounts = {
+        let fetchResource = {
             if let activeAccessToken = self.accessToken {
                 let headers: HTTPHeaders = [
                     .authorization(bearerToken: activeAccessToken)
@@ -145,19 +143,7 @@ class BackendAPI: ObservableObject {
         }
         
         loginThen {
-            fetchCompanyAccounts()
-        }
-    }
-    
-    func fetchCompanyAccounts() {
-        fetch("companyAccounts", withType: [CompanyAccount].self) { companyAccounts in
-            self.companyAccounts = companyAccounts
-        }
-    }
-    
-    func fetchCandidates() {
-        fetch("candidates", withType: [Candidate].self) { candidates in
-            self.candidates = candidates
+            fetchResource()
         }
     }
     

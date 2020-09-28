@@ -9,11 +9,13 @@ import SwiftUI
 
 struct CandidatesDashboard: View {
     
-    @ObservedObject var backend = BackendAPI.shared
+    var backend = BackendAPI.shared
+    
+    @State var candidates: [Candidate] = [Candidate]()
     
     var body: some View {
         List {
-            ForEach(backend.candidates, id: \.self.id) { candidate in
+            ForEach(candidates, id: \.self.id) { candidate in
                 
                 NavigationLink(destination: CandidateForm(candidate)) {
                     VStack(alignment: .leading) {
@@ -29,7 +31,9 @@ struct CandidatesDashboard: View {
         }
         .navigationTitle("Candidates")
         .navigationBarItems(trailing: Button(action: {
-            backend.fetchCandidates()
+            backend.fetch("candidates", withType: [Candidate].self) { results in
+                self.candidates = results
+            }
         }) {
             Image(systemName: "icloud.and.arrow.down")
         })

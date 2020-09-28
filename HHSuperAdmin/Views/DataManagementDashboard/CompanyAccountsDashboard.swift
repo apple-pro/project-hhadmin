@@ -9,15 +9,19 @@ import SwiftUI
 
 struct CompanyAccountsDashboard: View {
     
-    @ObservedObject var backend = BackendAPI.shared
+    var backend = BackendAPI.shared
+    
+    @State var companyAccounts = [CompanyAccount]()
     
     var body: some View {
-        List(backend.companyAccounts) { companyAccount in
+        List(companyAccounts) { companyAccount in
             Text(companyAccount.name)
         }
         .navigationTitle("Company Accounts")
         .navigationBarItems(trailing: Button(action: {
-            backend.fetchCompanyAccounts()
+            backend.fetch("companyAccounts", withType: [CompanyAccount].self) { results in
+                self.companyAccounts = results
+            }
         }) {
             Image(systemName: "icloud.and.arrow.down")
         })
