@@ -9,25 +9,21 @@ import SwiftUI
 
 struct CandidateForm: View {
     
-    @State var candidate: Candidate?
+    var candidate: Candidate
     
     @State var headline = ""
     @State var currentCompanyName = ""
     @State var currentWorkTitle = ""
     @State var currentFunction = ""
     
-    init(_ c: Candidate) {
-        self.candidate = c
-        self.headline = c.headline ?? ""
-        self.currentCompanyName = c.currentCompanyName ?? ""
-        self.currentWorkTitle = c.currentWorkTitle ?? ""
-        self.currentFunction = c.currentFunction ?? ""
+    init(_ candidate: Candidate) {
+        self.candidate = candidate
     }
     
     var body: some View {
         Form {
             
-            Section(header: Text("Profile")) {
+            Section(header: Text("Profile (\(candidate.fullName)")) {
                 TextField("Headline", text: $headline)
             }
             
@@ -37,12 +33,17 @@ struct CandidateForm: View {
                 TextField("Function", text: $currentFunction)
             }
         }
-        .navigationTitle(candidate?.fullName ?? "New Candidate")
+        .navigationTitle("Candidate")
         .navigationBarItems(trailing: Button(action: {
             
         }) {
             Image(systemName: "folder")
-        })
+        }).onAppear {
+            headline = candidate.headline ?? ""
+            currentCompanyName = candidate.currentCompanyName ?? ""
+            currentWorkTitle = candidate.currentWorkTitle ?? ""
+            currentFunction = candidate.currentFunction ?? ""
+        }
     }
 }
 
