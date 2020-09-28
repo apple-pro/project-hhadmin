@@ -38,16 +38,14 @@ struct CandidatesDashboard: View {
                 
             }
         }
-        
-        
         .navigationTitle("Candidates")
-        .navigationBarItems(trailing: Button(action: {
-            loadData()
-        }) {
+        .navigationBarItems(trailing: Button(action: loadData) {
             Image(systemName: "icloud.and.arrow.down")
         }.disabled(loading))
         .onAppear {
-            loadData()
+            if candidates.isEmpty {
+                loadData()
+            }
         }
     }
     
