@@ -23,7 +23,7 @@ struct CandidateForm: View {
     var body: some View {
         Form {
             
-            Section(header: Text("Profile (\(candidate.fullName)")) {
+            Section(header: Text("Profile (\(candidate.fullName))")) {
                 TextField("Headline", text: $headline)
             }
             
@@ -37,7 +37,7 @@ struct CandidateForm: View {
         .navigationBarItems(trailing: Button(action: {
             
         }) {
-            Image(systemName: "folder")
+            Image(systemName: "icloud.and.arrow.up")
         }).onAppear {
             headline = candidate.headline ?? ""
             currentCompanyName = candidate.currentCompanyName ?? ""

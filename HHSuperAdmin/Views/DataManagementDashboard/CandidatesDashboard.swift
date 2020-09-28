@@ -15,28 +15,31 @@ struct CandidatesDashboard: View {
     @State var loading = false
     
     var body: some View {
-        VStack {
+        List {
             if loading {
-                ProgressView()
-                    .progressViewStyle(CircularProgressViewStyle())
-            }
-            List {
-                ForEach(candidates, id: \.self.id) { candidate in
-                    
-                    NavigationLink(destination: CandidateForm(candidate)) {
-                        VStack(alignment: .leading) {
-                            Text(candidate.fullName)
-                                .font(.title)
-                            
-                            Text(candidate.currentCompanyName ?? "Jobless")
-                                .font(.caption)
-                        }
-                    }
-                    
+                HStack(alignment: .center) {
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle())
                 }
+                .frame(maxWidth: .infinity)
             }
             
+            ForEach(candidates, id: \.self.id) { candidate in
+                
+                NavigationLink(destination: CandidateForm(candidate)) {
+                    VStack(alignment: .leading) {
+                        Text(candidate.fullName)
+                            .font(.title)
+                        
+                        Text(candidate.currentCompanyName ?? "Jobless")
+                            .font(.caption)
+                    }
+                }
+                
+            }
         }
+        
+        
         .navigationTitle("Candidates")
         .navigationBarItems(trailing: Button(action: {
             loadData()
