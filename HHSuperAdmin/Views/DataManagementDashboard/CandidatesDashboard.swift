@@ -39,16 +39,20 @@ struct CandidatesDashboard: View {
         }
         .navigationTitle("Candidates")
         .navigationBarItems(trailing: Button(action: {
-            
+            loadData()
         }) {
             Image(systemName: "icloud.and.arrow.down")
-        })
+        }.disabled(loading))
         .onAppear {
-            loading = true
-            backend.fetch("candidates", withType: [Candidate].self) { results in
-                self.candidates = results
-                self.loading = false
-            }
+            loadData()
+        }
+    }
+    
+    func loadData() {
+        loading = true
+        backend.fetch("candidates", withType: [Candidate].self) { results in
+            self.candidates = results
+            self.loading = false
         }
     }
 }
