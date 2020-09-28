@@ -18,6 +18,7 @@ struct ConfigurationSetup: View {
     @State var clientSecret = ""
     @State var username: String = ""
     @State var password: String = ""
+    @State var testStatus: BackendAPI.TestStatus = .idle
     
     var body: some View {
         Form {
@@ -42,9 +43,9 @@ struct ConfigurationSetup: View {
             }
             
             Section {
-                Text("Validation Status: \(backend.testStatus.display)")
+                Text("Validation Status: \(testStatus.display)")
                 
-                switch backend.testStatus {
+                switch testStatus {
                 case .pass:
                     Button("Configure \(name)") {
                         configurationManager.configure(withName: name, api: apiEndpoint, clientId: clientId, andSecret: clientSecret)
@@ -53,7 +54,9 @@ struct ConfigurationSetup: View {
                     }
                 default:
                     Button("Test") {
-                        backend.performStatusTestOnAPI(apiEndpoint, clientId: clientId, clientSecret: clientSecret, username:username, password: password)
+                        backend.performStatusTestOnAPI(apiEndpoint, clientId: clientId, clientSecret: clientSecret, username:username, password: password) { result in
+                            self.testStatus = result
+                        }
                     }
                 }
             }

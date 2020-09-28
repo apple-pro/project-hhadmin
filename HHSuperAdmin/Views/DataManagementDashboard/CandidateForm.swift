@@ -9,20 +9,35 @@ import SwiftUI
 
 struct CandidateForm: View {
     
-    @State var candidate: Candidate
+    @State var candidate: Candidate?
+    
+    @State var headline = ""
+    @State var currentCompanyName = ""
+    @State var currentWorkTitle = ""
+    @State var currentFunction = ""
+    
+    init(_ c: Candidate) {
+        self.candidate = c
+        self.headline = c.headline ?? ""
+        self.currentCompanyName = c.currentCompanyName ?? ""
+        self.currentWorkTitle = c.currentWorkTitle ?? ""
+        self.currentFunction = c.currentFunction ?? ""
+    }
     
     var body: some View {
         Form {
             
             Section(header: Text("Profile")) {
-                TextField("Name", text: $candidate.fullName)
+                TextField("Headline", text: $headline)
             }
             
-            Section(header: Text("Job Experience")) {
-                
+            Section(header: Text("Current Job")) {
+                TextField("Company", text: $currentCompanyName)
+                TextField("Title", text: $currentWorkTitle)
+                TextField("Function", text: $currentFunction)
             }
         }
-        .navigationTitle(candidate.fullName)
+        .navigationTitle(candidate?.fullName ?? "New Candidate")
         .navigationBarItems(trailing: Button(action: {
             
         }) {
@@ -33,6 +48,6 @@ struct CandidateForm: View {
 
 struct CandidateForm_Previews: PreviewProvider {
     static var previews: some View {
-        CandidateForm(candidate: mockCandidates[0])
+        CandidateForm(mockCandidates[0])
     }
 }

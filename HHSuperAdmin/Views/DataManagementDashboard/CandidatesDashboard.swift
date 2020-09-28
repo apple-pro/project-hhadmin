@@ -15,8 +15,8 @@ struct CandidatesDashboard: View {
         List {
             ForEach(backend.candidates, id: \.self.id) { candidate in
                 
-                NavigationLink(destination: CandidateForm(candidate: candidate)) {
-                    VStack {
+                NavigationLink(destination: CandidateForm(candidate)) {
+                    VStack(alignment: .leading) {
                         Text(candidate.fullName)
                             .font(.title)
                         

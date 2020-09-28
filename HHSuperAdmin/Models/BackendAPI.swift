@@ -30,7 +30,6 @@ class BackendAPI: ObservableObject {
         }
     }
     
-    @Published var testStatus: TestStatus = .idle
     @Published var companyAccounts = [CompanyAccount]()
     @Published var candidates = [Candidate]()
     
@@ -39,8 +38,7 @@ class BackendAPI: ObservableObject {
     
     private init() {}
     
-    func performStatusTestOnAPI(_ apiEndpoint: String, clientId: String, clientSecret: String, username: String, password: String) {
-        testStatus = .testing
+    func performStatusTestOnAPI(_ apiEndpoint: String, clientId: String, clientSecret: String, username: String, password: String, completionHandler: @escaping (TestStatus) -> Void) {
         
         let loginURL = "\(apiEndpoint)/oauth/token"
         
@@ -64,14 +62,14 @@ class BackendAPI: ObservableObject {
                     case .success(let result):
                         if let json = result as? NSDictionary {
                             if let errorDescription = json["error_description"] as? String {
-                                self.testStatus = .failed(errorMessage: errorDescription)
+                                completionHandler(.failed(errorMessage: errorDescription))
                             } else {
-                                self.testStatus = .pass
+                                completionHandler(.pass)
                             }
                         }
                     case .failure(let error):
                         debugPrint(error)
-                        self.testStatus = .failed(errorMessage: "Unknown Error")
+                        completionHandler(.failed(errorMessage: "Unknown Error"))
                     }
                    }
     }
