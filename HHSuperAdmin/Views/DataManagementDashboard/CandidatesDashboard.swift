@@ -15,8 +15,6 @@ struct CandidatesDashboard: View {
     @State var loading = false
     @State var advanceSearch = false
     
-    @State var searchText = ""
-    
     var body: some View {
         List {
             if loading {
@@ -59,20 +57,9 @@ struct CandidatesDashboard: View {
         }
         
         .sheet(isPresented: $advanceSearch) {
-            Form {
-                Section(header: Text("Basic")) {
-                    TextField("Search...", text: $searchText)
-                }
-                
-                Section {
-                    Button(action: showSearch) {
-                        HStack(alignment: .center) {
-                            Text("Search")
-                            Image(systemName: "magnifyingglass")
-                        }
-                    }
-                }
-                
+            CandidateSearchFilter() { searchResult in
+                print("Searched For: \(searchResult)")
+                advanceSearch.toggle()
             }
         }
     }

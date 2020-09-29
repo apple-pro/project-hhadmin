@@ -22,6 +22,7 @@
 		F05908F5251F3C0700B42655 /* CandidateForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = F05908F4251F3C0700B42655 /* CandidateForm.swift */; };
 		F0789CDC251EF04700E9756D /* DataCleanupDashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0789CDB251EF04700E9756D /* DataCleanupDashboard.swift */; };
 		F0789CDF251EF5E700E9756D /* CompanySetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0789CDE251EF5E700E9756D /* CompanySetup.swift */; };
+		F07A4B292523464300C391CF /* CandidateSearchFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F07A4B282523464300C391CF /* CandidateSearchFilter.swift */; };
 		F098D4EA2520809900F24ED0 /* BackendAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = F098D4E92520809900F24ED0 /* BackendAPI.swift */; };
 		F0E35DC9251E1E8000A51B01 /* HHSuperAdminApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E35DC8251E1E8000A51B01 /* HHSuperAdminApp.swift */; };
 		F0E35DCB251E1E8000A51B01 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0E35DCA251E1E8000A51B01 /* ContentView.swift */; };
@@ -47,6 +48,7 @@
 		F05908F4251F3C0700B42655 /* CandidateForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateForm.swift; sourceTree = "<group>"; };
 		F0789CDB251EF04700E9756D /* DataCleanupDashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataCleanupDashboard.swift; sourceTree = "<group>"; };
 		F0789CDE251EF5E700E9756D /* CompanySetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanySetup.swift; sourceTree = "<group>"; };
+		F07A4B282523464300C391CF /* CandidateSearchFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CandidateSearchFilter.swift; sourceTree = "<group>"; };
 		F098D4E92520809900F24ED0 /* BackendAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackendAPI.swift; sourceTree = "<group>"; };
 		F0E35DC5251E1E8000A51B01 /* HHSuperAdmin.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HHSuperAdmin.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0E35DC8251E1E8000A51B01 /* HHSuperAdminApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HHSuperAdminApp.swift; sourceTree = "<group>"; };
@@ -113,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				F05908EA251F28CF00B42655 /* CandidatesDashboard.swift */,
+				F07A4B282523464300C391CF /* CandidateSearchFilter.swift */,
 				F05908F4251F3C0700B42655 /* CandidateForm.swift */,
 				F05908EE251F28F100B42655 /* RolesDashboard.swift */,
 				F003CEDF2520C40400AFA802 /* CompanyAccountsDashboard.swift */,
@@ -288,6 +291,7 @@
 				F05908EF251F28F100B42655 /* RolesDashboard.swift in Sources */,
 				F04E0611251EB80A00175CAA /* Dashboard.swift in Sources */,
 				F05908E7251F274F00B42655 /* DataManagementDashboard.swift in Sources */,
+				F07A4B292523464300C391CF /* CandidateSearchFilter.swift in Sources */,
 				F0789CDF251EF5E700E9756D /* CompanySetup.swift in Sources */,
 				F098D4EA2520809900F24ED0 /* BackendAPI.swift in Sources */,
 				F04E061F251EC58400175CAA /* Utilities.swift in Sources */,
