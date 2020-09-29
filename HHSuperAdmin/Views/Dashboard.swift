@@ -11,7 +11,7 @@ struct Dashboard: View {
     var body: some View {
         NavigationView {
             Navigation()
-            DataCleanupDashboard()
+            DataManagementDashboard()
         }
     }
 }
