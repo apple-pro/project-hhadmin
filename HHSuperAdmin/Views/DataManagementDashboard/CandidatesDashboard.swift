@@ -122,6 +122,7 @@ struct SearchBar: View {
  
             Button(action: cancelHandler) {
                 Text("Cancel")
+                    .foregroundColor(.accentColor)
             }
             .padding(.trailing, 10)
         }
@@ -144,7 +145,16 @@ struct SearchOverlay: View {
             SearchBar(text: $text, tapHandler: {}, cancelHandler: onCancel)
                 //.matchedGeometryEffect(id: "SearchBar", in: animation)
             
-            Spacer()
+            List(mockSearchRecommendation) { recommendation in
+                Image(systemName: recommendation.icon)
+                    .renderingMode(.template)
+                    .foregroundColor(recommendation.color)
+                    .padding(.all, 5)
+                    .border(recommendation.color, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
+                
+                Text(recommendation.display)
+                    .foregroundColor(recommendation.color)
+            }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding()

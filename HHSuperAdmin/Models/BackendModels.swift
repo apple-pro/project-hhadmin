@@ -5,7 +5,7 @@
 //  Created by StartupBuilder.INFO on 9/26/20.
 //
 
-import Foundation
+import SwiftUI
 
 typealias Resource = Identifiable & Codable
 
@@ -38,4 +38,40 @@ struct CompanyAccount: Resource {
 struct Location: Codable {
     let lat: Float
     let lon: Float
+}
+
+struct SearchRecommendation: Resource {
+    
+    let id: String
+    let display: String
+    let type: String
+    
+    let value: [String:String]
+    
+    var color: Color {
+        switch type {
+        case "JOBEXP":
+            return Color.green
+        case "SKILL":
+            return Color.orange
+        case "JUMPER":
+            return Color.red
+        default:
+            return Color.gray
+        }
+    }
+    
+    var icon: String {
+        switch type {
+        case "JOBEXP":
+            return "clock"
+        case "SKILL":
+            return "pencil.and.outline"
+        case "JUMPER":
+            return "paperplane"
+        default:
+            return "doc"
+        }
+    }
+    
 }
