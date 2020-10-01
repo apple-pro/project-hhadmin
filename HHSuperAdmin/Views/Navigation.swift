@@ -81,6 +81,8 @@ struct NavItem: View {
 
 struct Navigation_Previews: PreviewProvider {
     static var previews: some View {
-        Navigation()
+        NavigationView {
+            Navigation()
+        }
     }
 }

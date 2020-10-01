@@ -14,52 +14,67 @@ struct CandidatesDashboard: View {
     @State var candidates: [Candidate] = [Candidate]()
     @State var loading = false
     @State var advanceSearch = false
+    @State var searchText = ""
+    
+    @State var showSearchOverlay = false
     
     var body: some View {
-        List {
-            if loading {
-                HStack(alignment: .center) {
-                    ProgressView()
-                        .progressViewStyle(CircularProgressViewStyle())
-                }
-                .frame(maxWidth: .infinity)
-            }
-            
-            ForEach(candidates, id: \.self.id) { candidate in
-                
-                NavigationLink(destination: CandidateForm(candidate)) {
-                    VStack(alignment: .leading) {
-                        Text(candidate.fullName)
-                            .font(.title)
-                        
-                        Text(candidate.currentCompanyName ?? "Jobless")
-                            .font(.caption)
+        ZStack {
+            List {
+                if loading {
+                    HStack(alignment: .center) {
+                        ProgressView()
+                            .progressViewStyle(CircularProgressViewStyle())
                     }
+                    .frame(maxWidth: .infinity)
                 }
                 
+                SearchBar(text: $searchText)
+                
+                ForEach(candidates, id: \.self.id) { candidate in
+                    
+                    NavigationLink(destination: CandidateForm(candidate)) {
+                        VStack(alignment: .leading) {
+                            Text(candidate.fullName)
+                                .font(.title)
+                            
+                            Text(candidate.currentCompanyName ?? "Jobless")
+                                .font(.caption)
+                        }
+                    }
+                    
+                }
             }
-        }
-        .navigationTitle("Candidates")
-        .navigationBarItems(trailing: HStack {
-            Button(action: loadData) {
-                Image(systemName: "icloud.and.arrow.down")
-            }.disabled(loading)
+            .navigationTitle("Candidates")
+            .navigationBarItems(trailing: HStack {
+                Button(action: loadData) {
+                    Image(systemName: "icloud.and.arrow.down")
+                }.disabled(loading)
+                
+                Button(action: showSearch) {
+                    Image(systemName: "magnifyingglass")
+                }.disabled(loading)
+            })
             
-            Button(action: showSearch) {
-                Image(systemName: "magnifyingglass")
-            }.disabled(loading)
-        })
-        
-        .onAppear {
-            if candidates.isEmpty {
-                loadData()
+            .onAppear {
+                if candidates.isEmpty {
+                    loadData()
+                }
             }
-        }
-        
-        .sheet(isPresented: $advanceSearch) {
-            CandidateSearchFilter() { searchResult in
-                print("Searched For: \(searchResult)")
-                advanceSearch.toggle()
+            
+//            .sheet(isPresented: $advanceSearch) {
+//                CandidateSearchFilter() { searchResult in
+//                    print("Searched For: \(searchResult)")
+//                    advanceSearch.toggle()
+//                }
+//            }
+            
+            if showSearchOverlay {
+                SearchOverlay(onCancel: {
+                    showSearchOverlay = false
+                }) {
+                    print("Searched: \($0)")
+                }
             }
         }
     }
@@ -73,12 +88,78 @@ struct CandidatesDashboard: View {
     }
     
     func showSearch() {
-        advanceSearch.toggle()
+        //advanceSearch.toggle()
+        showSearchOverlay = true
+    }
+}
+
+struct SearchBar: View {
+    
+    @Binding var text: String
+    @State private var isEditing = false
+ 
+    var body: some View {
+        HStack {
+ 
+            TextField("Search ...", text: $text)
+                .padding(7)
+                .padding(.horizontal, 25)
+                .background(Color(.systemGray6))
+                .cornerRadius(8)
+                .padding(.horizontal, 10)
+                .onTapGesture {
+                    self.isEditing = true
+                }
+ 
+            if isEditing {
+                Button(action: {
+                    self.isEditing = false
+                    self.text = ""
+ 
+                }) {
+                    Text("Cancel")
+                }
+                .padding(.trailing, 10)
+                .transition(.move(edge: .trailing))
+                .animation(.default)
+            }
+        }
+    }
+}
+
+struct SearchOverlay: View {
+    
+    @State var text = ""
+    
+    let onCancel: () -> Void
+    let onSearch: (String) -> Void
+    
+    var body: some View {
+        
+        VStack {
+            
+            SearchBar(text: $text)
+            
+            
+            Button(action: {
+                onSearch(text)
+            }) {
+                Text("Search")
+            }
+            
+            Button(action: onCancel) {
+                Text("Cancel")
+            }
+        }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color.white.opacity(0.95))
     }
 }
 
 struct Candidates_Previews: PreviewProvider {
     static var previews: some View {
-        CandidatesDashboard()
+        NavigationView {
+            CandidatesDashboard(candidates: mockCandidates)
+        }
     }
 }
