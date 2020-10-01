@@ -19,6 +19,7 @@ struct CandidatesDashboard: View {
     @State var searchText = ""
     
     @State var showSearchOverlay = false
+    @State var recommendations = [SearchRecommendation]()
     
     var body: some View {
         ZStack {
@@ -32,7 +33,7 @@ struct CandidatesDashboard: View {
                 }
                 
                 if !showSearchOverlay {
-                    SearchBar(text: $searchText, tapHandler: showSearch) {
+                    SearchBar(text: $searchText, searches: $recommendations, tapHandler: showSearch) {
                         
                     }
                     .matchedGeometryEffect(id: "SearchBar", in: animation)
@@ -103,28 +104,59 @@ struct CandidatesDashboard: View {
 struct SearchBar: View {
     
     @Binding var text: String
+    @Binding var searches: [SearchRecommendation]
     
     let tapHandler: () -> Void
     let cancelHandler: () -> Void
+    
+    let columns = [
+        GridItem(.adaptive(minimum: 80))
+    ]
  
     var body: some View {
-        HStack {
- 
-            TextField("Search ...", text: $text)
-                .padding(7)
-                .padding(.horizontal, 25)
-                .background(Color(.systemGray6))
-                .cornerRadius(8)
-                .padding(.horizontal, 10)
-                .onTapGesture {
-                    tapHandler()
+        VStack {
+            HStack {
+     
+                TextField("Search ...", text: $text)
+                    .padding(7)
+                    .padding(.horizontal, 25)
+                    .background(Color(.systemGray6))
+                    .cornerRadius(8)
+                    .padding(.horizontal, 10)
+                    .onTapGesture {
+                        tapHandler()
+                    }
+     
+                Button(action: cancelHandler) {
+                    Text("Cancel")
+                        .foregroundColor(.accentColor)
                 }
- 
-            Button(action: cancelHandler) {
-                Text("Cancel")
-                    .foregroundColor(.accentColor)
+                .padding(.trailing, 10)
             }
-            .padding(.trailing, 10)
+            
+            ScrollView {
+                LazyVGrid(columns: columns) {
+                    ForEach(searches, id: \.self.id) { recommendation in
+                        HStack {
+                            Text(recommendation.display)
+                                .font(.caption)
+                                .foregroundColor(recommendation.color)
+                            
+                            Button(action: {
+                                if let target = searches.firstIndex(where: { r in
+                                    r.id == recommendation.id
+                                }) {
+                                    searches.remove(at: target)
+                                }
+                            }, label: {
+                                Text("X")
+                                    .font(.caption)
+                                    .foregroundColor(recommendation.color)
+                            })
+                        }
+                    }
+                }
+            }
         }
     }
 }
@@ -134,6 +166,7 @@ struct SearchOverlay: View {
     let animation: Namespace.ID
     
     @State var text = ""
+    @State var recommendations = [SearchRecommendation]()
     
     let onCancel: () -> Void
     let onSearch: (String) -> Void
@@ -142,18 +175,22 @@ struct SearchOverlay: View {
         
         VStack {
             
-            SearchBar(text: $text, tapHandler: {}, cancelHandler: onCancel)
+            SearchBar(text: $text, searches: $recommendations, tapHandler: {}, cancelHandler: onCancel)
                 //.matchedGeometryEffect(id: "SearchBar", in: animation)
             
             List(mockSearchRecommendation) { recommendation in
-                Image(systemName: recommendation.icon)
-                    .renderingMode(.template)
-                    .foregroundColor(recommendation.color)
-                    .padding(.all, 5)
-                    .border(recommendation.color, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
-                
-                Text(recommendation.display)
-                    .foregroundColor(recommendation.color)
+                HStack {
+                    Image(systemName: recommendation.icon)
+                        .renderingMode(.template)
+                        .foregroundColor(recommendation.color)
+                        .padding(.all, 5)
+                        .border(recommendation.color, width: /*@START_MENU_TOKEN@*/1/*@END_MENU_TOKEN@*/)
+                    
+                    Text(recommendation.display)
+                        .foregroundColor(recommendation.color)
+                }.onTapGesture(count: 2) {
+                    recommendations.append(recommendation)
+                }
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
