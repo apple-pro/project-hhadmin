@@ -11,6 +11,8 @@ struct CandidatesDashboard: View {
     
     var backend = BackendAPI.shared
     
+    @Namespace private var animation
+    
     @State var candidates: [Candidate] = [Candidate]()
     @State var loading = false
     @State var advanceSearch = false
@@ -30,9 +32,11 @@ struct CandidatesDashboard: View {
                 }
                 
                 if !showSearchOverlay {
-                    SearchBar(text: $searchText) {
+                    SearchBar(text: $searchText, tapHandler: showSearch) {
                         
                     }
+                    .matchedGeometryEffect(id: "SearchBar", in: animation)
+                    .transition(.opacity)
                 }
                 
                 ForEach(candidates, id: \.self.id) { candidate in
@@ -53,34 +57,32 @@ struct CandidatesDashboard: View {
             .navigationBarItems(trailing: HStack {
                 Button(action: loadData) {
                     Image(systemName: "icloud.and.arrow.down")
-                }.disabled(loading)
-                
-                Button(action: showSearch) {
-                    Image(systemName: "magnifyingglass")
-                }.disabled(loading)
-            })
-            
-            .onAppear {
-                if candidates.isEmpty {
-                    loadData()
                 }
-            }
+                .disabled(loading)
+            })
+            .onAppear(perform: onAppear)
             
-//            .sheet(isPresented: $advanceSearch) {
-//                CandidateSearchFilter() { searchResult in
-//                    print("Searched For: \(searchResult)")
-//                    advanceSearch.toggle()
-//                }
-//            }
             
             if showSearchOverlay {
-                SearchOverlay(onCancel: {
-                    showSearchOverlay = false
+                SearchOverlay(animation: animation, onCancel: {
+                    withAnimation {
+                        showSearchOverlay.toggle()
+                    }
+                    
                 }) {
                     print("Searched: \($0)")
-                }.animation(.easeIn)
+                }
+                .transition(.opacity)
             }
-        }.navigationBarHidden(showSearchOverlay)
+        }
+        .edgesIgnoringSafeArea(.bottom)
+        .navigationBarHidden(showSearchOverlay)
+    }
+    
+    func onAppear() {
+        if candidates.isEmpty {
+            loadData()
+        }
     }
     
     func loadData() {
@@ -92,15 +94,17 @@ struct CandidatesDashboard: View {
     }
     
     func showSearch() {
-        //advanceSearch.toggle()
-        showSearchOverlay = true
+        withAnimation {
+            showSearchOverlay.toggle()
+        }
     }
 }
 
 struct SearchBar: View {
     
     @Binding var text: String
-    @State private var isEditing = false
+    
+    let tapHandler: () -> Void
     let cancelHandler: () -> Void
  
     var body: some View {
@@ -113,26 +117,20 @@ struct SearchBar: View {
                 .cornerRadius(8)
                 .padding(.horizontal, 10)
                 .onTapGesture {
-                    self.isEditing = true
+                    tapHandler()
                 }
  
-            if isEditing {
-                Button(action: {
-                    self.isEditing = false
-                    self.text = ""
- 
-                }) {
-                    Text("Cancel")
-                }
-                .padding(.trailing, 10)
-                .transition(.move(edge: .trailing))
-                .animation(.default)
+            Button(action: cancelHandler) {
+                Text("Cancel")
             }
+            .padding(.trailing, 10)
         }
     }
 }
 
 struct SearchOverlay: View {
+    
+    let animation: Namespace.ID
     
     @State var text = ""
     
@@ -143,23 +141,15 @@ struct SearchOverlay: View {
         
         VStack {
             
-            SearchBar(text: $text, cancelHandler: onCancel)
+            SearchBar(text: $text, tapHandler: {}, cancelHandler: onCancel)
+                //.matchedGeometryEffect(id: "SearchBar", in: animation)
             
             Spacer()
-            
-            Button(action: {
-                onSearch(text)
-            }) {
-                Text("Search")
-            }
-            
-            Button(action: onCancel) {
-                Text("Cancel")
-            }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .padding()
-        .opacity(0.95)
+        .background(Color.overlayBackground)
+        .opacity(0.99)
     }
 }
 

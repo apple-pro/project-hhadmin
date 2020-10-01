@@ -9,6 +9,7 @@ import SwiftUI
 
 extension Color {
     static let accent = Color("AccentColor")
+    static let overlayBackground = Color("OverlayBackground")
 }
 
 let mockCandidates = [
