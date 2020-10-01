@@ -29,7 +29,11 @@ struct CandidatesDashboard: View {
                     .frame(maxWidth: .infinity)
                 }
                 
-                SearchBar(text: $searchText)
+                if !showSearchOverlay {
+                    SearchBar(text: $searchText) {
+                        
+                    }
+                }
                 
                 ForEach(candidates, id: \.self.id) { candidate in
                     
@@ -74,9 +78,9 @@ struct CandidatesDashboard: View {
                     showSearchOverlay = false
                 }) {
                     print("Searched: \($0)")
-                }
+                }.animation(.easeIn)
             }
-        }
+        }.navigationBarHidden(showSearchOverlay)
     }
     
     func loadData() {
@@ -97,6 +101,7 @@ struct SearchBar: View {
     
     @Binding var text: String
     @State private var isEditing = false
+    let cancelHandler: () -> Void
  
     var body: some View {
         HStack {
@@ -138,8 +143,9 @@ struct SearchOverlay: View {
         
         VStack {
             
-            SearchBar(text: $text)
+            SearchBar(text: $text, cancelHandler: onCancel)
             
+            Spacer()
             
             Button(action: {
                 onSearch(text)
@@ -152,7 +158,8 @@ struct SearchOverlay: View {
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .background(Color.white.opacity(0.95))
+        .padding()
+        .opacity(0.95)
     }
 }
 

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ConfigurationSetup: View {
-    
+        
     @ObservedObject var configurationManager = ConfigurationManager.shared
     
     var backend = BackendAPI.shared
