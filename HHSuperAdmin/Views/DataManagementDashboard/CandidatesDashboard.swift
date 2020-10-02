@@ -112,11 +112,11 @@ struct SearchBar: View {
     let columns = [
         GridItem(.adaptive(minimum: 80))
     ]
- 
+    
     var body: some View {
         VStack {
             HStack {
-     
+                
                 TextField("Search ...", text: $text)
                     .padding(7)
                     .padding(.horizontal, 25)
@@ -126,7 +126,7 @@ struct SearchBar: View {
                     .onTapGesture {
                         tapHandler()
                     }
-     
+                
                 Button(action: cancelHandler) {
                     Text("Cancel")
                         .foregroundColor(.accentColor)
@@ -143,10 +143,12 @@ struct SearchBar: View {
                                 .foregroundColor(recommendation.color)
                             
                             Button(action: {
-                                if let target = searches.firstIndex(where: { r in
-                                    r.id == recommendation.id
-                                }) {
-                                    searches.remove(at: target)
+                                withAnimation {
+                                    if let target = searches.firstIndex(where: { r in
+                                        r.id == recommendation.id
+                                    }) {
+                                        searches.remove(at: target)
+                                    }
                                 }
                             }, label: {
                                 Text("X")
@@ -177,7 +179,7 @@ struct SearchOverlay: View {
         VStack {
             
             SearchBar(text: $text, searches: $recommendations, tapHandler: {}, cancelHandler: onCancel)
-                //.matchedGeometryEffect(id: "SearchBar", in: animation)
+            //.matchedGeometryEffect(id: "SearchBar", in: animation)
             
             List(availableRecommendations) { recommendation in
                 HStack {
@@ -190,14 +192,19 @@ struct SearchOverlay: View {
                     Text(recommendation.display)
                         .foregroundColor(recommendation.color)
                 }.onTapGesture(count: 2) {
-                    recommendations.append(recommendation)
                     
-                    if let target = availableRecommendations.firstIndex(where: { r in
-                        r.id == recommendation.id
-                    }) {
-                        availableRecommendations.remove(at: target)
+                    withAnimation {
+
+                        recommendations.append(recommendation)
+                        
+                        if let target = availableRecommendations.firstIndex(where: { r in
+                            r.id == recommendation.id
+                        }) {
+                            availableRecommendations.remove(at: target)
+                        }
                     }
                 }
+                
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
