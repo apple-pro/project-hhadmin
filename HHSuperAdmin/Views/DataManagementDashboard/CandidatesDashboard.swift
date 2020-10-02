@@ -167,6 +167,7 @@ struct SearchOverlay: View {
     
     @State var text = ""
     @State var recommendations = [SearchRecommendation]()
+    @State var availableRecommendations = [SearchRecommendation]()
     
     let onCancel: () -> Void
     let onSearch: (String) -> Void
@@ -178,7 +179,7 @@ struct SearchOverlay: View {
             SearchBar(text: $text, searches: $recommendations, tapHandler: {}, cancelHandler: onCancel)
                 //.matchedGeometryEffect(id: "SearchBar", in: animation)
             
-            List(mockSearchRecommendation) { recommendation in
+            List(availableRecommendations) { recommendation in
                 HStack {
                     Image(systemName: recommendation.icon)
                         .renderingMode(.template)
@@ -190,6 +191,12 @@ struct SearchOverlay: View {
                         .foregroundColor(recommendation.color)
                 }.onTapGesture(count: 2) {
                     recommendations.append(recommendation)
+                    
+                    if let target = availableRecommendations.firstIndex(where: { r in
+                        r.id == recommendation.id
+                    }) {
+                        availableRecommendations.remove(at: target)
+                    }
                 }
             }
         }
@@ -197,6 +204,9 @@ struct SearchOverlay: View {
         .padding()
         .background(Color.overlayBackground)
         .opacity(0.99)
+        .onAppear {
+            availableRecommendations = mockSearchRecommendation
+        }
     }
 }
 
