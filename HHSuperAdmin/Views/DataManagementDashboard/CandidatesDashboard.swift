@@ -9,59 +9,13 @@ import SwiftUI
 
 struct CandidatesDashboard: View {
     
-    var backend = BackendAPI.shared
     
     @Namespace private var animation
-    
-    @State var candidates: [Candidate] = [Candidate]()
-    @State var loading = false
-    @State var advanceSearch = false
-    @State var searchText = ""
-    
-    @State var showSearchOverlay = false
-    @State var recommendations = [SearchRecommendation]()
+    @State var showSearchOverlay = true
     
     var body: some View {
         ZStack {
-            List {
-                if loading {
-                    HStack(alignment: .center) {
-                        ProgressView()
-                            .progressViewStyle(CircularProgressViewStyle())
-                    }
-                    .frame(maxWidth: .infinity)
-                }
-                
-                if !showSearchOverlay {
-                    SearchBar(text: $searchText, searches: $recommendations, tapHandler: showSearch) {
-                        
-                    }
-                    .matchedGeometryEffect(id: "SearchBar", in: animation)
-                    .transition(.opacity)
-                }
-                
-                ForEach(candidates, id: \.self.id) { candidate in
-                    
-                    NavigationLink(destination: CandidateForm(candidate)) {
-                        VStack(alignment: .leading) {
-                            Text(candidate.fullName)
-                                .font(.title)
-                            
-                            Text(candidate.currentCompanyName ?? "Jobless")
-                                .font(.caption)
-                        }
-                    }
-                    
-                }
-            }
-            .navigationTitle("Candidates")
-            .navigationBarItems(trailing: HStack {
-                Button(action: loadData) {
-                    Image(systemName: "icloud.and.arrow.down")
-                }
-                .disabled(loading)
-            })
-            .onAppear(perform: onAppear)
+            CandidatesList(animation: animation, showSearchOverlay: $showSearchOverlay)
             
             
             if showSearchOverlay {
@@ -78,6 +32,63 @@ struct CandidatesDashboard: View {
         }
         .edgesIgnoringSafeArea(.bottom)
         .navigationBarHidden(showSearchOverlay)
+    }
+}
+
+struct CandidatesList: View {
+    
+    var backend = BackendAPI.shared
+    
+    var animation: Namespace.ID
+    
+    @State var candidates: [Candidate] = [Candidate]()
+    @State var loading = false
+    @State var advanceSearch = false
+    @State var searchText = ""
+    
+    @Binding var showSearchOverlay: Bool
+    @State var recommendations = [SearchRecommendation]()
+    
+    var body: some View {
+        List {
+            if loading {
+                HStack(alignment: .center) {
+                    ProgressView()
+                        .progressViewStyle(CircularProgressViewStyle())
+                }
+                .frame(maxWidth: .infinity)
+            }
+            
+            if !showSearchOverlay {
+                SearchBar(text: $searchText, searches: $recommendations, animation: animation, tapHandler: showSearch) {
+                    
+                }
+                .transition(.opacity)
+                .matchedGeometryEffect(id: "SearchBar", in: animation)
+            }
+            
+            ForEach(candidates, id: \.self.id) { candidate in
+                
+                NavigationLink(destination: CandidateForm(candidate)) {
+                    VStack(alignment: .leading) {
+                        Text(candidate.fullName)
+                            .font(.title)
+                        
+                        Text(candidate.currentCompanyName ?? "Jobless")
+                            .font(.caption)
+                    }
+                }
+                
+            }
+        }
+        .navigationTitle("Candidates")
+        .navigationBarItems(trailing: HStack {
+            Button(action: loadData) {
+                Image(systemName: "icloud.and.arrow.down")
+            }
+            .disabled(loading)
+        })
+        .onAppear(perform: onAppear)
     }
     
     func onAppear() {
@@ -105,6 +116,7 @@ struct SearchBar: View {
     
     @Binding var text: String
     @Binding var searches: [SearchRecommendation]
+    var animation: Namespace.ID
     
     let tapHandler: () -> Void
     let cancelHandler: () -> Void
@@ -155,7 +167,7 @@ struct SearchBar: View {
                                     .font(.caption)
                                     .foregroundColor(recommendation.color)
                             })
-                        }
+                        }.matchedGeometryEffect(id: "item:\(recommendation.id)", in: animation)
                     }
                 }
             }
@@ -165,7 +177,7 @@ struct SearchBar: View {
 
 struct SearchOverlay: View {
     
-    let animation: Namespace.ID
+    var animation: Namespace.ID
     
     @State var text = ""
     @State var recommendations = [SearchRecommendation]()
@@ -178,8 +190,8 @@ struct SearchOverlay: View {
         
         VStack {
             
-            SearchBar(text: $text, searches: $recommendations, tapHandler: {}, cancelHandler: onCancel)
-            //.matchedGeometryEffect(id: "SearchBar", in: animation)
+            SearchBar(text: $text, searches: $recommendations, animation: animation, tapHandler: {}, cancelHandler: onCancel)
+                //.matchedGeometryEffect(id: "SearchBar", in: animation)
             
             List(availableRecommendations) { recommendation in
                 HStack {
@@ -204,6 +216,7 @@ struct SearchOverlay: View {
                         }
                     }
                 }
+                //.matchedGeometryEffect(id: "item:\(recommendation.id)", in: animation)
                 
             }
         }
@@ -220,7 +233,7 @@ struct SearchOverlay: View {
 struct Candidates_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView {
-            CandidatesDashboard(candidates: mockCandidates)
+            CandidatesDashboard()
         }
     }
 }
