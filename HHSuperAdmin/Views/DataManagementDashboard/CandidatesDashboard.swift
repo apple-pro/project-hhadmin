@@ -60,11 +60,15 @@ struct CandidatesList: View {
             }
             
             if !showSearchOverlay {
-                SearchBar(text: $searchText, searches: $recommendations, animation: animation, tapHandler: showSearch) {
-                    
-                }
-                .transition(.opacity)
-                .matchedGeometryEffect(id: "SearchBar", in: animation)
+                TextField("Search ...", text: $searchText)
+                    .padding(7)
+                    .padding(.horizontal, 25)
+                    .background(Color(.systemGray6))
+                    .cornerRadius(8)
+                    .padding(.horizontal, 10)
+                    .onTapGesture {
+                        showSearchOverlay.toggle()
+                    }
             }
             
             ForEach(candidates, id: \.self.id) { candidate in
@@ -99,7 +103,7 @@ struct CandidatesList: View {
     
     func loadData() {
         loading = true
-        backend.fetch("candidates", withType: [Candidate].self) { results in
+        backend.fetch("candidates") { (results: [Candidate]) in
             self.candidates = results
             self.loading = false
         }
@@ -118,7 +122,6 @@ struct SearchBar: View {
     @Binding var searches: [SearchRecommendation]
     var animation: Namespace.ID
     
-    let tapHandler: () -> Void
     let cancelHandler: () -> Void
     
     let columns = [
@@ -135,9 +138,6 @@ struct SearchBar: View {
                     .background(Color(.systemGray6))
                     .cornerRadius(8)
                     .padding(.horizontal, 10)
-                    .onTapGesture {
-                        tapHandler()
-                    }
                 
                 Button(action: cancelHandler) {
                     Text("Cancel")
@@ -153,6 +153,7 @@ struct SearchBar: View {
                             Text(recommendation.display)
                                 .font(.caption)
                                 .foregroundColor(recommendation.color)
+                                .matchedGeometryEffect(id: "item:\(recommendation.id)", in: animation)
                             
                             Button(action: {
                                 withAnimation {
@@ -167,7 +168,7 @@ struct SearchBar: View {
                                     .font(.caption)
                                     .foregroundColor(recommendation.color)
                             })
-                        }.matchedGeometryEffect(id: "item:\(recommendation.id)", in: animation)
+                        }
                     }
                 }
             }
@@ -190,8 +191,7 @@ struct SearchOverlay: View {
         
         VStack {
             
-            SearchBar(text: $text, searches: $recommendations, animation: animation, tapHandler: {}, cancelHandler: onCancel)
-                //.matchedGeometryEffect(id: "SearchBar", in: animation)
+            SearchBar(text: $text, searches: $recommendations, animation: animation, cancelHandler: onCancel)
             
             List(availableRecommendations) { recommendation in
                 HStack {
@@ -203,21 +203,20 @@ struct SearchOverlay: View {
                     
                     Text(recommendation.display)
                         .foregroundColor(recommendation.color)
-                }.onTapGesture(count: 2) {
+                }
+                .matchedGeometryEffect(id: "item:\(recommendation.id)", in: animation)
+                .onTapGesture(count: 2) {
                     
                     withAnimation {
 
-                        recommendations.append(recommendation)
-                        
                         if let target = availableRecommendations.firstIndex(where: { r in
                             r.id == recommendation.id
                         }) {
                             availableRecommendations.remove(at: target)
+                            recommendations.append(recommendation)
                         }
                     }
                 }
-                //.matchedGeometryEffect(id: "item:\(recommendation.id)", in: animation)
-                
             }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)

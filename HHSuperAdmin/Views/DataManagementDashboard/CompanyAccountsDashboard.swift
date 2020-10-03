@@ -19,7 +19,7 @@ struct CompanyAccountsDashboard: View {
         }
         .navigationTitle("Company Accounts")
         .navigationBarItems(trailing: Button(action: {
-            backend.fetch("companyAccounts", withType: [CompanyAccount].self) { results in
+            backend.fetch("companyAccounts") { results in
                 self.companyAccounts = results
             }
         }) {

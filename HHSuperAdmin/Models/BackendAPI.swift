@@ -117,7 +117,7 @@ class BackendAPI {
                    }
     }
     
-    func fetch<T: Decodable>(_ resource: String, withType type: T.Type, onCompletion completionHandler: @escaping (T) -> Void) {
+    func fetch<T: Decodable>(_ resource: String, onCompletion completionHandler: @escaping (T) -> Void) {
         let listCompanyAccountsUrl = "\(config.apiEndpoint!)/api/\(resource)"
         
         let fetchResource = {
@@ -132,7 +132,7 @@ class BackendAPI {
                     case .success(let result):
                         let json = JSON(result)
                         let decoder = JSONDecoder()
-                        if let results = try? decoder.decode(type, from: json["_embedded"][resource].rawData()) {
+                        if let results = try? decoder.decode(T.self, from: json["_embedded"][resource].rawData()) {
                             completionHandler(results)
                         }
                     case .failure(let error):
